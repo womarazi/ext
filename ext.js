@@ -29,19 +29,16 @@ function extmainstart(){
     toinput({type:'textarea', label: 'all pages css', onChange: allcsschange}, true);
     toinput({type:'textarea', label: location.host + ' js', onChange: pagejschange}, true);
     toinput({type:'textarea', label: location.host + ' css', onChange: pagecsschange}, true);
-    let reqjq = get('jq');
-    let reqjqui = get('jqui');
     let req = { jq:!!get('jq'), jqui:!!get('jqui')};
     function checkallreqloaded(){
         for( let key in req) { if(!req) return false; }
         // true;
         loaduserscripts();
-        
         return true;
     }
     function loaduserscripts() {}
-    if (req.jq) injectjs('//code.jquery.com/jquery-3.6.1.min.js', () => { req.jq=false; checkallreqloaded()});
-    if (req.jqui) injectjs('https://code.jquery.com/ui/1.13.2/jquery-ui.min.js');
+    if (req.jq) injectjs('//code.jquery.com/jquery-3.6.1.min.js', () => { req.jq=false; checkallreqloaded(); });
+    if (req.jqui) injectjs('https://code.jquery.com/ui/1.13.2/jquery-ui.min.js',  () => { req.jqui=false; checkallreqloaded(); });
     
     
 }
