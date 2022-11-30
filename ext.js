@@ -71,7 +71,8 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
     obj.type = obj.type || 'string';
     obj.label = obj.label || '';
     console.log( Object.entries(obj));
-    return tohtml("<label class="inputlabel"><" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[0] + '"').join(" ") + ">" + obj.value + "</" + obj.tag+'><span>' + obj.label + '</span></label>');
+    return tohtml("<label class='inputlabel'><" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[0] + '"').join(" ") + ">"
+                  + obj.value + "</" + obj.tag+'><span>' + obj.label + '</span></label>');
 }
 
 // DOMContentLoaded = dom is ready
