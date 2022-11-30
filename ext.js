@@ -1,6 +1,14 @@
 var extmain = null;
 var tohtmltmp = null;
 
+function set(key, val){
+    try { val =JSON.stringify(val); } catch(e){}
+    localStorage.setItem('_ext_' + key, val); }
+function get(key){
+    let ret = localStorage.getItem('_ext_' + key);             
+    try { ret = JSON.parse(ret); } catch(e){}
+    return ret; }
+
 function extmain(){
     extmain = tohtml('<div class="extmain"></div>', false, true);
     var extrajs = tohtml('<script class="extmain"></script>', true);
@@ -9,8 +17,14 @@ function extmain(){
     
     function xchange(e, i){ console.log('xchange', arguments, e, i); }
     
-    toinput({type:'number', max:100, min:0, step:0.1, label: 'x', onChange: xchange}, true);
-    toinput({type:'number', max:100, min:0, step:0.1, label: 'y', onChange: ychange}, true);
+    let xval = get('x');
+    let yval = get('y');
+    if (isNaN(xval)) xval = 5;
+    if (isNaN(yval)) yval = 5;
+    toinput({type:'number', max:100, min:0, step:0.1, label: 'x', onChange: xchange, value: xval }, true);
+    toinput({type:'number', max:100, min:0, step:0.1, label: 'y', onChange: ychange, value: xval}, true);
+    toinput({type:'checkbox', label: 'jquery', onChange: jquerycheck}, true);
+    toinput({type:'checkbox', label: 'jqueryui', onChange: jqueryuicheck}, true);
     toinput({type:'textarea', label: 'all pages js', onChange: alljschange}, true);
     toinput({type:'textarea', label: 'all pages css', onChange: allcsschange}, true);
     toinput({type:'textarea', label: location.host + ' js', onChange: pagejschange}, true);
@@ -21,10 +35,11 @@ function extmain(){
     function checkallreqloaded(){
         for( let key in req) { if(!req) return false; }
         // true;
-        // load user scripts
+        loaduserscripts();
         
         return true;
     }
+    function loaduserscripts() {}
     if (req.jq) injectjs('//code.jquery.com/jquery-3.6.1.min.js', () => { req.jq=false; checkallreqloaded()});
     if (req.jqui) injectjs('https://code.jquery.com/ui/1.13.2/jquery-ui.min.js');
     
