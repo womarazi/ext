@@ -1,9 +1,29 @@
 .extmain{
-display: flex;
+  display: flex;
+  position: absolute;
+  left: 5vw;
+  top: 5vh;
+  width: 15px;
+  height: 15px;
+  background: lightgray;
+  border: 2px solid black;
+}
+
+.extmain:hover{
+  left: 0vw;
+  top: 0vh;
+  width: 50vw;
+  height: 100vh;
+  background: lightgray;
+  border: 2px solid black;
 }
 .extmain>*{
 display:none;
 }
-.extmain>-minimized{
-display: 'flex';
+.extmain>.minimized{
+display: flex;
+}
+
+.extmain:hover>*{
+display:flex;
 }
