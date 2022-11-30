@@ -9,7 +9,7 @@ function get(key){
     try { ret = JSON.parse(ret); } catch(e){}
     return ret; }
 
-function extmain(){
+function extmainstart(){
     extmain = tohtml('<div class="extmain"></div>', false, true);
     var extrajs = tohtml('<script class="extmain"></script>', true);
     var extracss = tohtml('<style class="extmain"></style>', true);
@@ -78,4 +78,4 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
 // DOMContentLoaded = dom is ready
 // load = dom is ready & css js img... are loaded
 
-document.addEventListener("DOMContentLoaded", extmain);
+document.addEventListener("DOMContentLoaded", extmainstart);
