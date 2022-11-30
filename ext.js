@@ -1,6 +1,6 @@
 var extmain = null;
 var tohtmltmp = null;
-console.warn('extmain loaded', extmainstart);
+console.warn('extmain loaded 3');
 function set(key, val){
     try { val =JSON.stringify(val); } catch(e){}
     localStorage.setItem('_ext_' + key, val); }
