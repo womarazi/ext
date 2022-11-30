@@ -58,7 +58,7 @@ function injectjs(src, callback = () => {}) {
 }
 
 function tohtml(str, appendextmain=false, appendbody = false){
-    tohtmltmp || document.createElement('div');
+    tohtmltmp = tohtmltmp || document.createElement('div');
     tohtmltmp.innerHTML = str;
     let ret= tohtmltmp.childNodes[0];
     if(appendbody) document.body.append(ret);
