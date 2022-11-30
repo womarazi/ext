@@ -1,0 +1,9 @@
+.extmain{
+display: flex;
+}
+.extmain>*{
+display:none;
+}
+.extmain>-minimized{
+display: 'flex';
+}
