@@ -1,6 +1,6 @@
 var extmain = null;
 var tohtmltmp = null;
-console.warn('extmain load 3');
+console.warn('extmain load 4');
 function set(key, val){
     if (!key) return;
     try { val =JSON.stringify(val); } catch(e){}
