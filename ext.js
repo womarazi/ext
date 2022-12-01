@@ -2,9 +2,11 @@ var extmain = null;
 var tohtmltmp = null;
 console.warn('extmain load 3');
 function set(key, val){
+    if (!key) return;
     try { val =JSON.stringify(val); } catch(e){}
     localStorage.setItem('_ext_' + key, val); }
 function get(key){
+    if (!key) return undefined;
     let ret = localStorage.getItem('_ext_' + key);             
     try { ret = JSON.parse(ret); } catch(e){}
     return ret; }
@@ -15,20 +17,29 @@ function extmainstart(){
     var extracss = tohtml('<style class="extmain"></style>', true);
     tohtml('<div class="minimized"></div>', true);
     
-    function xchange(e, i){ console.log('xchange', arguments, e, i); }
     
     let xval = get('x');
     let yval = get('y');
     if (isNaN(xval)) xval = 5;
     if (isNaN(yval)) yval = 5;
-    toinput({type:'number', max:100, min:0, step:0.1, label: 'x', onChange: xchange, value: xval }, true);
-    toinput({type:'number', max:100, min:0, step:0.1, label: 'y', onChange: ychange, value: xval}, true);
-    toinput({type:'checkbox', label: 'jquery', onChange: jquerycheck}, true);
-    toinput({type:'checkbox', label: 'jqueryui', onChange: jqueryuicheck}, true);
-    toinput({type:'textarea', label: 'all pages js', onChange: alljschange}, true);
-    toinput({type:'textarea', label: 'all pages css', onChange: allcsschange}, true);
-    toinput({type:'textarea', label: location.host + ' js', onChange: pagejschange}, true);
-    toinput({type:'textarea', label: location.host + ' css', onChange: pagecsschange}, true);
+
+    tohtml('<div class="extrow">' +
+        toinput({type:'number', max:100, min:0, step:0.1, label: 'x', key: "ext_x", defaultvalue: xval}).outerHTML +
+        toinput({type:'number', max:100, min:0, step:0.1, label: 'y', key: "ext_y", defaultvalue: yval}).outerHTML + "</div>", true);
+
+    tohtml('<div class="extrow">'
+           + toinput({type:'checkbox', label: 'jquery', onChange: jquerycheck}).outerHTML +
+           toinput({type:'checkbox', label: 'jqueryui', onChange: jqueryuicheck}).outerHTML + "</div>", true);
+    
+    
+    tohtml('<div class="extrow">' +
+        toinput({type:'textarea', label: 'all pages js', onChange: 'universaljs'}).outerHTML +
+        toinput({type:'textarea', label: 'all pages css', onChange: 'universalcss'}).outerHTML + "</div>", true);
+
+    tohtml('<div class="extrow">' +
+        toinput({type:'textarea', label: location.host + ' js', key: 'pagejs'}).outerHTML +
+        toinput({type:'textarea', label: location.host + ' css', key: 'pagecss'}).outerHTML + "</div>", true);
+
     let req = { jq:!!get('jq'), jqui:!!get('jqui')};
     function checkallreqloaded(){
         for( let key in req) { if(!req) return false; }
@@ -68,7 +79,16 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
     obj.type = obj.type || 'string';
     obj.label = obj.label || '';
     console.log( Object.entries(obj));
-    return tohtml("<label class='inputlabel'><" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[0] + '"').join(" ") + ">"
+    
+    if (obj.value === undefined){
+        if (obj.key) obj.value = get(obj.key);
+        if (!obj.value) obj.value = obj.defaultvalue; }
+    try { obj.value = JSON.stringify(obj.value) } catch(e){}
+    if (!obj.value) obj.value = '';
+
+    obj.onchange = function inputchange(e){ let input = e.target; set(input.getAttribute("key"), input.value); }
+
+    return tohtml("<label class='inputlabel'><" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[1] + '"').join(" ") + ">"
                   + obj.value + "</" + obj.tag+'><span>' + obj.label + '</span></label>');
 }
 
