@@ -20,8 +20,8 @@ function extmainstart(){
     
     let xval = get('x');
     let yval = get('y');
-    if (isNaN(xval)) xval = 5;
-    if (isNaN(yval)) yval = 5;
+    if (xval === null || xval === undefined || isNaN(+xval)) xval = 5; else xval = +xval;
+    if (yval === null || yval === undefined || isNaN(+yval)) yval = 5; else xval = +xval;
 
     tohtml('<div class="extrow">' +
         toinput({type:'number', max:100, min:0, step:0.1, label: 'x', key: "ext_x", defaultvalue: xval}).outerHTML +
@@ -88,8 +88,13 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
 
     obj.onchange = function inputchange(e){ let input = e.target; set(input.getAttribute("key"), input.value); }
 
+    let innertext = '';
+    switch(obj.tag){
+        default:
+        case 'textarea': innertext = obj.value;
+        case 'input': innertext = ''; break; }
     return tohtml("<label class='inputlabel'><" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[1] + '"').join(" ") + ">"
-                  + obj.value + "</" + obj.tag+'><span>' + obj.label + '</span></label>');
+                  + (innertext) + "</" + obj.tag+'><span>' + obj.label + '</span></label>');
 }
 
 // DOMContentLoaded = dom is ready
