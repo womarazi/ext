@@ -10,7 +10,7 @@
   z-index:100000;
 }
 
-.extmain:hover{
+.extmain:hover, .extmain:focus-within{
   left: 0vw;
   top: 0vh;
   width: 50vw;
@@ -25,6 +25,6 @@ display:none;
 display: flex;
 }
 
-.extmain:hover>*{
+.extmain:hover>*, .extmain:focus-within>*, {
 display:flex;
 }
