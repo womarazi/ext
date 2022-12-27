@@ -91,7 +91,7 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
     let innertext = '';
     switch(obj.tag){
         default:
-        case 'textarea': innertext = obj.value;
+        case 'textarea': innertext = obj.value; break;
         case 'input': innertext = ''; break; }
     return tohtml("<label class='inputlabel'><" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[1] + '"').join(" ") + ">"
                   + (innertext) + "</" + obj.tag+'><span>' + obj.label + '</span></label>');
