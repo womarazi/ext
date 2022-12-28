@@ -8,6 +8,7 @@
   background: lightgray;
   border: 4px solid black;
   z-index:100000;
+  flex-wrap: wrap;
 }
 
 .extmain:hover, .extmain:focus-within{
@@ -27,4 +28,9 @@ display: flex;
 
 .extmain:hover>*, .extmain:focus-within>* {
 display:flex;
+}
+
+
+.extmain:hover>.minimized, .extmain:focus-within>.minimized{
+display: none;
 }
