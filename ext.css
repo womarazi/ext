@@ -1,6 +1,6 @@
 .extmain{
   display: flex;
-  position: sticky;
+  position: fixed;
   left: 5vw;
   top: 5vh;
   width: 30px;
@@ -25,6 +25,6 @@ display:none;
 display: flex;
 }
 
-.extmain:hover>*, .extmain:focus-within>*, {
+.extmain:hover>*, .extmain:focus-within>* {
 display:flex;
 }
