@@ -16,12 +16,18 @@
   top: 0vh;
   width: 50vw;
   height: 100vh;
-  background: lightgray;
+  background: white;
   border: 2px solid black;
 }
 .extmain>*{
-display:none;
+  display:none;
 }
+
+.extmain:hover>script, .extmain:hover>style, 
+.extmain:focus-within>script, .extmain:focus-within>style {
+  display:none;
+}
+
 .extmain>.minimized{
 display: flex;
 }
