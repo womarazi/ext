@@ -28,13 +28,13 @@ function extmainstart(){
         toinput({type:'number', max:100, min:0, step:0.1, label: 'y', key: "ext_y", defaultvalue: yval}).outerHTML + "</div>", true);
 
     tohtml('<div class="extrow">'
-           + toinput({type:'checkbox', label: 'jquery', onChange: jquerycheck}).outerHTML +
-           toinput({type:'checkbox', label: 'jqueryui', onChange: jqueryuicheck}).outerHTML + "</div>", true);
+           + toinput({type:'checkbox', label: 'jquery', key: "jquerycheck", defaultvalue: true}).outerHTML +
+           toinput({type:'checkbox', label: 'jqueryui', key: "jqueryuicheck", defaultvalue: false}).outerHTML + "</div>", true);
     
     
     tohtml('<div class="extrow">' +
-        toinput({type:'textarea', label: 'all pages js', onChange: 'universaljs'}).outerHTML +
-        toinput({type:'textarea', label: 'all pages css', onChange: 'universalcss'}).outerHTML + "</div>", true);
+        toinput({type:'textarea', label: 'all pages js', key: 'universaljs'}).outerHTML +
+        toinput({type:'textarea', label: 'all pages css', key: 'universalcss'}).outerHTML + "</div>", true);
 
     tohtml('<div class="extrow">' +
         toinput({type:'textarea', label: location.host + ' js', key: 'pagejs'}).outerHTML +
