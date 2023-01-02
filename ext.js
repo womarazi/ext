@@ -100,7 +100,7 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
         case 'div': innertext = obj.value; obj.contenteditable=true; break;
         case 'textarea': innertext = obj.value; break;
         case 'input': innertext = ''; break; }
-    return tohtml("<label class='inputlabel' class='" + (obj.tag === "input" ? "" : "fillheight")"'>" +
+    return tohtml("<label class='inputlabel' class='" + (obj.tag === "input" ? "" : "fillheight") + "'>" +
                   "<" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[1] + '"').join(" ") + ">" +
                   "</" + obj.tag+'><span>' + obj.label + '</span>'+
                   (innertext) +
