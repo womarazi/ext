@@ -89,8 +89,15 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
     obj.onchange = function inputchange(e){ let input = e.target; set(input.getAttribute("key"), input.value); }
 
     let innertext = '';
+    
+    switch(obj.tag){
+        default: break;
+        case 'textarea':
+        case 'div':
+        case 'input': obj.tag = obj.type; delete obj.type; break; }
     switch(obj.tag){
         default:
+        case 'div': innertext = obj.value; obj.contenteditable=true; break;
         case 'textarea': innertext = obj.value; break;
         case 'input': innertext = ''; break; }
     return tohtml("<label class='inputlabel'><" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[1] + '"').join(" ") + ">"
