@@ -22,7 +22,7 @@
   border: 2px solid black;
 }
 .extmain>*{
-  display:none;
+  display: none;
 }
 
 .extmain:hover>script, .extmain:hover>style, 
@@ -47,7 +47,6 @@ display: none;
 
 .extrow{
   width: 100%;
-  display: flex;
 }
 .extrow>*{
 margin:auto;
