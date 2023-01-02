@@ -12,11 +12,13 @@
 }
 
 .extmain:hover, .extmain:focus-within{
-  left: 0vw;
-  top: 0vh;
+  left: 2vw;
+  top: 2vh;
   width: 50vw;
   height: 100vh;
   background: white;
+  color: black;
+  font-size: 1em;
   border: 2px solid black;
 }
 .extmain>*{
@@ -39,4 +41,14 @@ display:flex;
 
 .extmain:hover>.minimized, .extmain:focus-within>.minimized{
 display: none;
+}
+
+
+
+.extrow{
+  width: 100%;
+  display: flex;
+}
+.extrow>*{
+margin:auto;
 }
