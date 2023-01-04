@@ -2,7 +2,6 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   left: 5vw;
   top: 5vh;
   width: 30px;
