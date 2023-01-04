@@ -73,6 +73,7 @@ function tohtml(str, appendextmain=false, appendbody = false){
     if(appendextmain) extmain.append(ret);
     return ret;
 }
+function extjs_inputchange(e){ console.warn("extjs_inputchange", e); let input = e.target; set(input.getAttribute("key"), input.value); }
 function toinput(obj/*{min, max, step, type, tag, label...}*/){
     if (!obj) obj = {}
     obj.tag = obj.tag || 'input';
@@ -86,7 +87,7 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
     try { obj.value = JSON.stringify(obj.value) } catch(e){}
     if (!obj.value) obj.value = '';
 
-    obj.onchange = function inputchange(e){ let input = e.target; set(input.getAttribute("key"), input.value); }
+    obj.onchange = "extjs_inputchange";
 
     let innertext = '';
     
