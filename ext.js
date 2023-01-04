@@ -32,11 +32,11 @@ function extmainstart(){
            toinput({type:'checkbox', label: 'jqueryui', key: "jqueryuicheck", defaultvalue: false}).outerHTML + "</div>", true);
     
     
-    tohtml('<div class="extrow">' +
+    tohtml('<div class="extrow fill">' +
         toinput({type:'textarea', label: 'all pages js', key: 'universaljs'}).outerHTML +
         toinput({type:'textarea', label: 'all pages css', key: 'universalcss'}).outerHTML + "</div>", true);
 
-    tohtml('<div class="extrow">' +
+    tohtml('<div class="extrow fill">' +
         toinput({type:'textarea', label: location.host + ' js', key: 'pagejs'}).outerHTML +
         toinput({type:'textarea', label: location.host + ' css', key: 'pagecss'}).outerHTML + "</div>", true);
 
@@ -90,7 +90,7 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
 
     let innertext = '';
     
-    switch(obj.tag){
+    switch(obj.type){
         default: break;
         case 'textarea':
         case 'div':
