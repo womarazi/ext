@@ -87,7 +87,7 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
     try { obj.value = JSON.stringify(obj.value) } catch(e){}
     if (!obj.value) obj.value = '';
 
-    obj.onchange = "extjs_inputchange";
+    obj.onchange = "extjs_inputchange(this)";
 
     let innertext = '';
     
