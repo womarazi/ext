@@ -108,6 +108,6 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
 }
 
 // DOMContentLoaded = dom is ready
-// load = dom is ready & css js img... are loaded
+// load = dom is ready & css js img...  are loaded
 
 document.addEventListener("DOMContentLoaded", extmainstart);
