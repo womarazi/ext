@@ -87,7 +87,6 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
     try { obj.value = JSON.stringify(obj.value) } catch(e){}
     if (!obj.value) obj.value = '';
 
-    obj.onchange = "extjs_inputchange(this)";
 
     let innertext = '';
     
@@ -101,11 +100,15 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
         case 'div': innertext = obj.value; obj.contenteditable=true; break;
         case 'textarea': innertext = obj.value; break;
         case 'input': innertext = ''; break; }
-    return tohtml("<label class='inputlabel' class='" + (obj.tag === "input" ? "" : "fillheight") + "'>" +
+    
+    obj.onchangefake = "extjs_inputchange(this)";
+    let htmlel = tohtml("<label class='inputlabel' class='" + (obj.tag === "input" ? "" : "fillheight") + "'>" +
                   "<" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[1] + '"').join(" ") + ">" +
                   "</" + obj.tag+'><span>' + obj.label + '</span>'+
                   (innertext) +
                   '</label>');
+    htmlel.onchange=extjs_inputchange;
+    return htmlel;
 }
 
 // DOMContentLoaded = dom is ready
