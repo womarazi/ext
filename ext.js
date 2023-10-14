@@ -1,6 +1,7 @@
 var extmain = null;
 var tohtmltmp = null;
 console.warn('extmain load 4');
+let _extjs_hasExecuted = false;
 function set(key, val){
     if (!key) return;
     try { val =JSON.stringify(val); } catch(e){}
@@ -12,6 +13,8 @@ function get(key){
     return ret; }
 
 function extmainstart(){
+    if (document.body && _extjs_hasExecuted) return;
+    _extjs_hasExecuted = true;
     extmain = tohtml('<div class="extmain"></div>', false, true);
     var extrajs = tohtml('<script class="extmain"></script>', true);
     var extracss = tohtml('<style class="extmain"></style>', true);
@@ -125,5 +128,13 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
 
 // DOMContentLoaded = dom is ready
 // load = dom is ready & css js img...  are loaded
+function ifpageloaded(callback, checktime = 300) {
+    if (document.readyState === 'ready' || document.readyState === 'complete') {
+    callback();
+  } else setTimeout( () => ifpageloaded(callback, checktime), checktime);
+}
 
-document.addEventListener("DOMContentLoaded", extmainstart);
+
+// document.addEventListener("DOMContentLoaded", extmainstart); // won't unclude case if page is already loaded
+
+ifpageloaded(extmainstart)
