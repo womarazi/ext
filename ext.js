@@ -31,14 +31,14 @@ function extmainstart(){
            + toinput({type:'checkbox', label: 'jquery', key: "jquerycheck", defaultvalue: true}).outerHTML +
            toinput({type:'checkbox', label: 'jqueryui', key: "jqueryuicheck", defaultvalue: false}).outerHTML + "</div>", true);
     
-    
-    tohtml('<div class="extrow fill">' +
-        toinput({type:'textarea', label: 'all pages js', key: 'universaljs'}).outerHTML +
-        toinput({type:'textarea', label: 'all pages css', key: 'universalcss'}).outerHTML + "</div>", true);
+
 
     tohtml('<div class="extrow fill">' +
         toinput({type:'textarea', label: location.host + ' js', key: 'pagejs'}).outerHTML +
         toinput({type:'textarea', label: location.host + ' css', key: 'pagecss'}).outerHTML + "</div>", true);
+    tohtml('<div class="extrow fill">' +
+        toinput({type:'textarea', label: 'all pages js', key: 'universaljs'}).outerHTML +
+        toinput({type:'textarea', label: 'all pages css', key: 'universalcss'}).outerHTML + "</div>", true);
 
     let req = { jq:!!get('jq'), jqui:!!get('jqui')};
     function checkallreqloaded(){
@@ -74,6 +74,7 @@ function tohtml(str, appendextmain=false, appendbody = false){
     return ret;
 }
 function extjs_inputchange(e){ console.warn("extjs_inputchange", e); let input = e.target; set(input.getAttribute("key"), input.value); }
+function extjs_checkboxchange(e){ console.warn("extjs_checkboxchange", e); let input = e.target; set(input.getAttribute("key"), input.checked); }
 function toinput(obj/*{min, max, step, type, tag, label...}*/){
     if (!obj) obj = {}
     obj.tag = obj.tag || 'input';
@@ -90,8 +91,18 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
 
     let innertext = '';
     
+    obj.onchangefake = "extjs_inputchange(this)";
+    obj.onchange = "extjs_inputchange(this)";
     switch(obj.type){
         default: break;
+        case "checkbox":
+            if (obj.checked === undefined) obj.checked = obj.value === 'true';
+            // not use obj.defaultvalue?
+            delete obj.value;
+
+            obj.onchangefake = "extjs_checkboxchange(this)";
+            obj.onchange = "extjs_checkboxchange(this)";
+            break;
         case 'textarea':
         case 'div':
         case 'input': obj.tag = obj.type; delete obj.type; break; }
@@ -101,13 +112,13 @@ function toinput(obj/*{min, max, step, type, tag, label...}*/){
         case 'textarea': innertext = obj.value; break;
         case 'input': innertext = ''; break; }
     
-    obj.onchangefake = "extjs_inputchange(this)";
+
     let htmlel = tohtml("<label class='inputlabel' class='" + (obj.tag === "input" ? "" : "fillheight") + "'>" +
                   "<" + obj.tag + " " + Object.entries(obj).map(pair => pair[0] + '="' + pair[1] + '"').join(" ") + ">" +
-                  "</" + obj.tag+'><span>' + obj.label + '</span>'+
                   (innertext) +
+                  "</" + obj.tag+'><span>' + obj.label + '</span>'+
                   '</label>');
-    htmlel.onchange=extjs_inputchange;
+    // htmlel.onchange=extjs_inputchange;
     return htmlel;
 }
 
