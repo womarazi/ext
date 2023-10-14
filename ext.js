@@ -54,15 +54,15 @@ function extmainstart(){
     
 }
 
-function injectjs(src, callback = () => {}) {
-  var head = document.getElementsByTagName("head")[0];
+function injectjs(src, callback = () => {}, body = undefined) {
   var script = document.createElement("script");
   script.src = src; //"//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js";
   script.onload = function() {
     if(callback) callback();
     // $("p").css("border", "3px solid red");
   };
-  head.appendChild(script);
+  if (body) script.text = body;
+  document.head.appendChild(script);
 }
 
 function tohtml(str, appendextmain=false, appendbody = false){
