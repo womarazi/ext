@@ -73,8 +73,8 @@ function tohtml(str, appendextmain=false, appendbody = false){
     if(appendextmain) extmain.append(ret);
     return ret;
 }
-function extjs_inputchange(thiss){ console.warn("extjs_inputchange", e); let input = thiss; set(input.getAttribute("key"), input.value); }
-function extjs_checkboxchange(thiss){ console.warn("extjs_checkboxchange", e); let input = thiss; set(input.getAttribute("key"), input.checked); }
+function extjs_inputchange(thiss){ console.warn("extjs_inputchange", thiss); let input = thiss; set(input.getAttribute("key"), input.value); }
+function extjs_checkboxchange(thiss){ console.warn("extjs_checkboxchange", thiss); let input = thiss; set(input.getAttribute("key"), input.checked); }
 function toinput(obj/*{min, max, step, type, tag, label...}*/){
     if (!obj) obj = {}
     obj.tag = obj.tag || 'input';
