@@ -62,6 +62,7 @@ function injectjs(src, callback = () => {}, body = undefined) {
     // $("p").css("border", "3px solid red");
   };
   if (body) script.text = body;
+  console.log("injected js script", {src, body, callback});
   document.head.appendChild(script);
 }
 
