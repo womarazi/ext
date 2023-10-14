@@ -1,6 +1,6 @@
 var extmain = null;
 var tohtmltmp = null;
-console.warn('extmain load 4');
+console.warn('extmain load 5');
 let _extjs_hasExecuted = false;
 function set(key, val){
     if (!key) return;
